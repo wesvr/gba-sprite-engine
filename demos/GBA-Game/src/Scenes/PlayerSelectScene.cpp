@@ -10,22 +10,15 @@
 
 #include "PlayerSelectScene.h"
 #include "../recourses/backgrounds/charSelectMenuBackground.h"
-#include "../recourses/sprites/mario.h"
-#include "../recourses/sprites/luigi.h"
-#include "../recourses/sprites/peach.h"
-#include "../recourses/sprites/yoshi.h"
-#include "../recourses/sprites/hand.h"
 #include "../recourses/sounds/backgroundSound.h"
 #include "StartScene.h"
 #include "MapScene.h"
-
-// TODO: Conversion problem!
-//#include "../BuildPlayer.h"
+#include "../builderPattern/CharacterDirector.h"
+#include <iostream>
 
 PlayerSelectScene::PlayerSelectScene(const std::shared_ptr<GBAEngine> &engine) : Scene(engine) {}
 
 std::vector<Background *> PlayerSelectScene::backgrounds() {
-    //return {background.get()};
     return {};
 }
 
@@ -37,43 +30,11 @@ void PlayerSelectScene::load() {
     PlayerPosition = 0;
 
     backgroundPalette = std::unique_ptr<BackgroundPaletteManager>(new BackgroundPaletteManager());
-    //backgroundPalette = std::unique_ptr<BackgroundPaletteManager>(new BackgroundPaletteManager(charSelectPal, sizeof(charSelectPal)));
     foregroundPalette = std::unique_ptr<ForegroundPaletteManager>(new ForegroundPaletteManager(charSelectSharedPal, sizeof(charSelectSharedPal)));
 
-    //background = std::unique_ptr<Background>(new Background(1, charSelectTiles, sizeof(charSelectTiles), charSelectMap, sizeof(charSelectMap), 16, 1, MAPLAYOUT_32X32));
+    buildPlayableCharacterSprites();
 
     SpriteBuilder<Sprite> builder;
-
-    // Selection screens
-
-    //TODO:
-    /*MarioBuilder *marioBuilder;
-    Build(reinterpret_cast<BuildPlayer *>(marioBuilder));*/
-
-
-    Sprite_Mario = builder
-            .withData(marioSelTiles, sizeof(marioSelTiles))
-            .withSize(SIZE_32_32)
-            .withLocation(50, 60)
-            .buildPtr();
-
-    Sprite_Luigi = builder
-            .withData(luigiSelTiles, sizeof(luigiSelTiles))
-            .withSize(SIZE_32_32)
-            .withLocation(85, 60)
-            .buildPtr();
-
-    Sprite_Peach = builder
-            .withData(peachSelTiles, sizeof(peachSelTiles))
-            .withSize(SIZE_32_32)
-            .withLocation(120, 60)
-            .buildPtr();
-
-    Sprite_Yoshi = builder
-            .withData(yoshiSelTiles, sizeof(yoshiSelTiles))
-            .withSize(SIZE_32_32)
-            .withLocation(155, 60)
-            .buildPtr();
 
     Sprite_Hand = builder
             .withData(handSelTiles, sizeof(handSelTiles))
@@ -106,19 +67,19 @@ void PlayerSelectScene::PlayerIsSelected(u16 keys){
     if(Bool_PressingA && !(keys & KEY_A)){
 
         if(BOOL_PlayerIsSelected){
-            if (PlayerPosition == 1) {
+            if (PlayerPosition == 0) {
                 charSelect = CharSelection::mario_char;
-            } else if (PlayerPosition == 2) {
+            } else if (PlayerPosition == 1) {
                 charSelect = CharSelection::luigi_char;
-            } else if (PlayerPosition == 3) {
+            } else if (PlayerPosition == 2) {
                 charSelect = CharSelection::peach_char;
-            } else if (PlayerPosition == 4) {
+            } else if (PlayerPosition == 3) {
                 charSelect = CharSelection::yoshi_char;
             }
 
             //character selection meegeven aan de volgende scene
             auto mainGameScene = new MapScene(engine);
-            //mainGameScene->setCharacter(charSelect= static_cast<CharSelection>(PlayerPosition));
+            mainGameScene->setCharacter(charSelect= static_cast<CharSelection>(PlayerPosition));
             mainGameScene->setCharacter(charSelect);
             engine->transitionIntoScene(mainGameScene, new FadeOutScene(5));
         } else {
@@ -129,13 +90,21 @@ void PlayerSelectScene::PlayerIsSelected(u16 keys){
     }
 }
 void PlayerSelectScene::PlayerIsNotSelected(u16 keys){
+    static int leftPressed = 0;
+    static int rightPressed = 0;
     if (Bool_PressingLeft && !(keys & KEY_LEFT)) {
-        PlayerPosition = ((PlayerPosition - 1) % 5) + 0.1;
+        leftPressed++;
+        TextStream::instance().setText("left key" + std::to_string(((PlayerPosition - 1) % 4)), 0, 0);
+        TextStream::instance().setFontColor(Text_setFontColor);
+        PlayerPosition = ((PlayerPosition - 1) % 4);
         Bool_PressingLeft = false;
     }
 
     if (Bool_PressingRight && !(keys & KEY_RIGHT)) {
-        PlayerPosition = ((PlayerPosition + 1) % 5) + 0.1;
+        rightPressed++;
+        TextStream::instance().setText("right key" + std::to_string(rightPressed), 1, 0);
+        TextStream::instance().setFontColor(Text_setFontColor);
+        PlayerPosition = ((PlayerPosition + 1) % 4);
         Bool_PressingRight = false;
     }
 
@@ -176,13 +145,31 @@ void PlayerSelectScene::tick(u16 keys) {
     }
 
     //Positie van de Sprite_Hand
-    if (PlayerPosition == 1) {
+    if (PlayerPosition == 0) {
         Sprite_Hand->moveTo(55, 40);
-    } else if (PlayerPosition == 2) {
+    } else if (PlayerPosition == 1) {
         Sprite_Hand->moveTo(90, 40);
-    } else if (PlayerPosition == 3) {
+    } else if (PlayerPosition == 2) {
         Sprite_Hand->moveTo(125, 40);
-    } else if (PlayerPosition == 4) {
+    } else if (PlayerPosition == 3) {
         Sprite_Hand->moveTo(160, 40);
     }
+}
+
+void PlayerSelectScene::buildPlayableCharacterSprites() {
+    SpriteBuilder<Sprite> builder;
+
+    // Selection screens
+    CharacterDirector director;
+    director.buildMario(builder);
+    Sprite_Mario = builder.buildPtr();
+
+    director.buildLuigi(builder);
+    Sprite_Luigi = builder.buildPtr();
+
+    director.buildPeach(builder);
+    Sprite_Peach = builder.buildPtr();
+
+    director.buildYoshi(builder);
+    Sprite_Yoshi = builder.buildPtr();
 }

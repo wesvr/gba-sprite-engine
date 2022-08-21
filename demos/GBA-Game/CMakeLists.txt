@@ -1,6 +1,9 @@
 project(GBA-Game)
 
 add_executable(${PROJECT_NAME}.elf
+        src/builderPattern/CharacterDirector.cpp
+        src/builderPattern/CharacterDirector.h
+
         src/recourses/backgrounds/charSelectMenuBackground.h
         src/recourses/backgrounds/gameOverBackground.h
         src/recourses/backgrounds/miniGameBackground1.h
@@ -49,7 +52,7 @@ add_executable(${PROJECT_NAME}.elf
         src/Scenes/Players/QuestionBlock.cpp
         src/Scenes/Players/QuestionBlock.h
         src/recourses/sprites/QuestionBlockTiles.h
-        src/recourses/sprites/sharedPal.h)
+        src/recourses/sprites/sharedPal.h src/builderPattern/CharacterDirector.cpp src/builderPattern/CharacterDirector.h)
 
 target_link_libraries(${PROJECT_NAME}.elf gba-sprite-engine)
 

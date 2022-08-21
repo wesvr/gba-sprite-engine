@@ -28,7 +28,7 @@ private:
 
     int Text_setFontColor= BLD_WHITE;
 
-
+    void buildPlayableCharacterSprites();
 
 public:
     int PlayerPosition;

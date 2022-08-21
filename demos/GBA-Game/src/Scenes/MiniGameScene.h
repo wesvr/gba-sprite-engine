@@ -13,6 +13,7 @@
 #include "Players/QuestionBlock.h"
 #include "Players/goomba.h"
 #include "Players/Luigi.h"
+#include "PlayerSelectScene.h"
 
 class MiniGameScene : public Scene{
 private:
@@ -50,6 +51,7 @@ public:
     void load() override;
     void tick(u16 keys) override;
     void addPoint();
+    void setCharacter(PlayerSelectScene::CharSelection character);
     void setData(int i, int PlayerScore, int PlayerPosX, int PlayerPosY);
     void PlayerWon();
     void PlayerDied();
