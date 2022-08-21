@@ -6,6 +6,7 @@
 #define GBA_SPRITE_ENGINE_PROJECT_PLAYERSELECTSCENE_H
 
 #include "libgba-sprite-engine/scene.h"
+#include "../../engine/include/libgba-sprite-engine/gba/tonc_memdef.h"
 
 class PlayerSelectScene : public Scene {
 private:
@@ -16,8 +17,6 @@ private:
     std::unique_ptr<Sprite> Sprite_Yoshi;
     std::unique_ptr<Sprite> Sprite_Hand;
 
-    //const signed char *const Music= backgroundMusic;
-    //const int Music_Bytes= backgroundMusic_bytes;
 
     bool
             Bool_PressingLeft,
@@ -43,7 +42,7 @@ public:
     void tick(u16 keys) override;
 
     enum CharSelection { mario_char, luigi_char, peach_char, yoshi_char };
-    CharSelection charSelect;//= static_cast<CharSelection>(0);
+    CharSelection charSelect;
 
 };
 

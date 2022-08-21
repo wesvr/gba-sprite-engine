@@ -4,10 +4,9 @@ add_executable(${PROJECT_NAME}.elf
         src/builderPattern/CharacterDirector.cpp
         src/builderPattern/CharacterDirector.h
 
-        src/recourses/backgrounds/charSelectMenuBackground.h
+        src/recourses/backgrounds/playerSelectMenuBackground.h
         src/recourses/backgrounds/gameOverBackground.h
-        src/recourses/backgrounds/miniGameBackground1.h
-        src/recourses/backgrounds/miniGameBackground2.h
+        src/recourses/backgrounds/miniGameBackground.h
         src/recourses/backgrounds/BoardMapBackground.h
         src/recourses/backgrounds/startBackground.h
 
@@ -40,7 +39,7 @@ add_executable(${PROJECT_NAME}.elf
         src/recourses/sprites/goombaTiles.h
         src/recourses/sprites/LuigiTiles.h
 
-        src/recourses/backgrounds/miniGameBackground2.h
+        src/recourses/backgrounds/miniGameBackground.h
         src/Scenes/Players/goomba.cpp
         src/Scenes/Players/goomba.h
         src/recourses/sprites/goombaTiles.h

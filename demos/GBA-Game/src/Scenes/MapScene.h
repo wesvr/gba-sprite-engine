@@ -10,6 +10,7 @@
 #include "libgba-sprite-engine/background/background.h"
 #include "libgba-sprite-engine/scene.h"
 #include "PlayerSelectScene.h"
+#include "../../engine/include/libgba-sprite-engine/gba/tonc_memdef.h"
 #include "../recourses/sounds/ShroomCitySound.h"
 
 class MapScene : public Scene

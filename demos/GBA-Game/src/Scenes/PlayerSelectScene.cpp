@@ -9,10 +9,10 @@
 #include "libgba-sprite-engine/background/text_stream.h"
 
 #include "PlayerSelectScene.h"
-#include "../recourses/backgrounds/charSelectMenuBackground.h"
-#include "../recourses/sounds/backgroundSound.h"
-#include "StartScene.h"
 #include "MapScene.h"
+#include "StartScene.h"
+#include "../recourses/backgrounds/playerSelectMenuBackground.h"
+#include "../recourses/sounds/backgroundSound.h"
 #include "../builderPattern/CharacterDirector.h"
 #include <iostream>
 

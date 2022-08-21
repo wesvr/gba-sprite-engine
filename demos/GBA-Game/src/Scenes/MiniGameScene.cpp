@@ -5,19 +5,20 @@
 #include "libgba-sprite-engine/sprites/sprite_builder.h"
 #include "libgba-sprite-engine/sprites/affine_sprite.h"
 #include "libgba-sprite-engine/background/text_stream.h"
+#include "libgba-sprite-engine/effects/fade_out_scene.h"
+#include "MapScene.h"
 #include "MiniGameScene.h"
-#include "../recourses/backgrounds/miniGameBackground2.h"
+#include "Players/goomba.h"
+#include "Players/QuestionBlock.h"
+#include "../recourses/backgrounds/miniGameBackground.h"
 #include "../recourses/sprites/LuigiTiles.h"
 #include "../recourses/sprites/sharedPal.h"
 #include "../recourses/sprites/goombaTiles.h"
 #include "../recourses/sprites/QuestionBlockTiles.h"
-#include "Players/goomba.h"
-#include "Players/QuestionBlock.h"
 #include "../recourses/sounds/backgroundSound.h"
 #include "../recourses/sounds/gameOverSound.h"
 #include "../recourses/sounds/WinnerSound.h"
-#include "MapScene.h"
-#include "libgba-sprite-engine/effects/fade_out_scene.h"
+
 
 #define bottomHeightFor32 45
 #define bottomHeightFor16 29

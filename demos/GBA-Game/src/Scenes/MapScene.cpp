@@ -16,7 +16,7 @@
 #include "../recourses/backgrounds/BoardMapBackground.h"
 #include "../recourses/sprites/mario.h"
 #include "../recourses/sprites/luigi.h"
-#include "MiniGameScene.h"
+
 
 MapScene::MapScene(const std::shared_ptr<GBAEngine> &engine) : Scene(engine) {}
 

@@ -10,8 +10,8 @@
 #include "StartScene.h"
 #include "PlayerSelectScene.h"
 
-#include "../recourses/backgrounds/startBackground.h"
 #include "libgba-sprite-engine/background/text_stream.h"
+#include "../recourses/backgrounds/startBackground.h"
 #include "../recourses/sprites/sharedPal.h"
 #include "../recourses/sprites/LuigiTiles.h"
 #include "../recourses/sprites/goombaTiles.h"
